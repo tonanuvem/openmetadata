@@ -2,6 +2,20 @@
 
 docker compose -f docker-compose.yml up --detach
 
+AIRFLOW_msglog="INFO - Starting the scheduler"
+OPENMETADATA_msglog="Started application"
+
+echo ""
+echo "Aguardando a configuração do OPEN METADATA."
+while [ "$(docker logs openmetadata_ingestion 2>&1 | grep "$AIRFLOW_msglog" | wc -l)" != "1" ]; do
+  printf "."
+  sleep 1
+done
+while [ "$(docker logs openmetadata_server 2>&1 | grep "$OPENMETADATA_msglog" | wc -l)" != "1" ]; do
+  printf "."
+  sleep 1
+done
+
 echo ""
 echo ""
 echo "Config OK"
