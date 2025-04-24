@@ -50,7 +50,7 @@ services:
       - "9220:9200"
       - "9300:9300"
     healthcheck:
-      test: "curl -s http://localhost:9220/_cluster/health?pretty | grep status | grep -qE 'green|yellow' || exit 1"
+      test: "curl -s http://localhost:9200/_cluster/health?pretty | grep status | grep -qE 'green|yellow' || exit 1"
       interval: 15s
       timeout: 10s
       retries: 10
