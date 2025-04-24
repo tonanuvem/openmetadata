@@ -1,6 +1,6 @@
 curl -sL -o docker-compose.yml https://github.com/open-metadata/OpenMetadata/releases/download/1.7.0-release/docker-compose.yml
 
-docker compose -f docker-compose.yml up --detach
+docker-compose -f docker-compose.yml up --detach
 
 AIRFLOW_msglog="INFO - Starting the scheduler"
 OPENMETADATA_msglog="Started application"
