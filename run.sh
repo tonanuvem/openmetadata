@@ -1,5 +1,5 @@
 curl -sL -o docker-compose.yml https://github.com/open-metadata/OpenMetadata/releases/download/1.7.0-release/docker-compose.yml
-sed 's/3306:3306/3366:3306/'
+sed 's/3306:3306/3366:3306/' docker-compose.yml
 
 docker-compose -f docker-compose.yml up --detach
 
