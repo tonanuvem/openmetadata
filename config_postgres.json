@@ -1,0 +1,16 @@
+{
+  "name": "postgres_service",
+  "serviceType": "Postgres",
+  "description": "Conexão com o banco de dados PostgreSQL",
+  "connection": {
+    "config": {
+      "type": "Postgres",
+      "hostPort": "IP:5432",
+      "username": "postgres",
+      "password": "admin",
+      "database": "postgres",
+      "connectionArguments": {},
+      "connectionOptions": {}
+    }
+  }
+}
