@@ -41,7 +41,7 @@ create_service = CreateDatabaseServiceRequest(
 )
 
 print("create_service.json():")
-create_service.json()
+create_service.model_dump_json()
 # '{"name": "test-service-table", "description": null, "serviceType": "Mysql", "connection": {"config": {"type": "Mysql", "scheme": "mysql+pymysql", "username": "username", "password": "**********", "hostPort": "http://localhost:1234", "database": null, "connectionOptions": null, "connectionArguments": null, "supportsMetadataExtraction": null, "supportsProfiler": null}}, "owner": null}'
 
 print("service_entity = metadata.create_or_update(data=create_service:")
