@@ -1,2 +1,9 @@
+#!/bin/bash
+
 docker-compose stop && docker-compose rm -f && docker volume prune -f && git pull
-docker volume rm  openmetadata_es-data openmetadata_ingestion-volume-dag-airflow openmetadata_ingestion-volume-dags openmetadata_ingestion-volume-tmp
+
+# Lista todos os volumes e remove cada um
+docker volume ls -q | grep openmetadata | while read volume; do
+  echo "Removendo volume: $volume"
+  docker volume rm "$volume"
+done
