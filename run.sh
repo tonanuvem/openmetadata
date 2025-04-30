@@ -1,8 +1,27 @@
-curl -sL -o docker-compose.yml https://github.com/open-metadata/OpenMetadata/releases/download/1.7.0-release/docker-compose.yml
-sed -i '/^\s*version:/ s/^/#/' docker-compose.yml
-sed -i 's/3306:3306/3366:3306/' docker-compose.yml
-sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' docker-compose.yml
-sed -i '/^\s*\(OIDC_\|AUTH0_\|AZURE_\|OKTA_\|GOOGLE_\|GITHUB_\)/s/^\(\s*\)/\1# /' docker-compose.yml
+#!/bin/bash
+
+set -euo pipefail
+
+OM_VERSION="1.7.0-release"
+OM_COMPOSE_URL="https://github.com/open-metadata/OpenMetadata/releases/download/${OM_VERSION}/docker-compose.yml"
+OM_COMPOSE_FILE="docker-compose.yml"
+
+echo "🔽 Baixando docker-compose do OpenMetadata ${OM_VERSION}..."
+curl -sL -o "${OM_COMPOSE_FILE}" "${OM_COMPOSE_URL}"
+
+echo "🔧 Comentando linha 'version:' para compatibilidade..."
+sed -i '/^\s*version:/ s/^/#/' "${OM_COMPOSE_FILE}"
+
+echo "🔧 Alterando porta do MySQL para evitar conflito local (3306 → 3366)..."
+sed -i 's/3306:3306/3366:3306/' "${OM_COMPOSE_FILE}"
+
+echo "🔧 Definindo AUTHENTICATION_PROVIDER como 'no-auth'..."
+sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' "${OM_COMPOSE_FILE}"
+
+echo "🧹 Comentando variáveis relacionadas a autenticação externa (OIDC, Auth0, etc)..."
+sed -i '/^[[:space:]]*\(OIDC_\|AUTH0_\|AZURE_\|OKTA_\|GOOGLE_\|GITHUB_\)/s/^\([[:space:]]*\)/\1# /' "${OM_COMPOSE_FILE}"
+
+echo "✅ docker-compose.yml configurado com sucesso para 'no-auth'."
 
 
 docker-compose -f docker-compose.yml up --detach
