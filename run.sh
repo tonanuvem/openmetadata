@@ -1,7 +1,7 @@
 curl -sL -o docker-compose.yml https://github.com/open-metadata/OpenMetadata/releases/download/1.7.0-release/docker-compose.yml
 sed -i '/^\s*version:/ s/^/#/' docker-compose.yml
 sed -i 's/3306:3306/3366:3306/' docker-compose.yml
-sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' docker-compose.yaml
+sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' docker-compose.yml
 
 
 docker-compose -f docker-compose.yml up --detach
