@@ -15,11 +15,11 @@ sed -i '/^\s*version:/ s/^/#/' "${OM_COMPOSE_FILE}"
 echo "🔧 Alterando porta do MySQL para evitar conflito local (3306 → 3366)..."
 sed -i 's/3306:3306/3366:3306/' "${OM_COMPOSE_FILE}"
 
-echo "🔧 Definindo AUTHENTICATION_PROVIDER como 'no-auth'..."
-sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' "${OM_COMPOSE_FILE}"
+#echo "🔧 Definindo AUTHENTICATION_PROVIDER como 'no-auth'..."
+#sed -i 's/AUTHENTICATION_PROVIDER: .*/AUTHENTICATION_PROVIDER: "no-auth"/' "${OM_COMPOSE_FILE}"
 
-echo "🧹 Comentando variáveis relacionadas a autenticação externa (OIDC, Auth0, etc)..."
-sed -i '/^[[:space:]]*\(OIDC_\|AUTH0_\|AZURE_\|OKTA_\|GOOGLE_\|GITHUB_\)/s/^\([[:space:]]*\)/\1# /' "${OM_COMPOSE_FILE}"
+#echo "🧹 Comentando variáveis relacionadas a autenticação externa (OIDC, Auth0, etc)..."
+#sed -i '/^[[:space:]]*\(OIDC_\|AUTH0_\|AZURE_\|OKTA_\|GOOGLE_\|GITHUB_\)/s/^\([[:space:]]*\)/\1# /' "${OM_COMPOSE_FILE}"
 
 echo "✅ docker-compose.yml configurado com sucesso para 'no-auth'."
 
